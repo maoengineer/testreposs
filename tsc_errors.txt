@@ -1,0 +1,6 @@
+﻿src/components/tools/ImageToTextClient.tsx(52,76): error TS2694: Namespace 'Tesseract' has no exported member 'Language'.
+src/components/tools/PdfToImagesClient.tsx(56,27): error TS2345: Argument of type '{ canvasContext: CanvasRenderingContext2D; viewport: PageViewport; }' is not assignable to parameter of type 'RenderParameters'.
+  Property 'canvas' is missing in type '{ canvasContext: CanvasRenderingContext2D; viewport: PageViewport; }' but required in type 'RenderParameters'.
+src/components/tools/PdfToWordClient.tsx(79,74): error TS2749: 'Paragraph' refers to a value, but is being used as a type here. Did you mean 'typeof Paragraph'?
+src/components/tools/TextToWordClient.tsx(35,23): error TS2749: 'Paragraph' refers to a value, but is being used as a type here. Did you mean 'typeof Paragraph'?
+src/lib/utils.ts(1,39): error TS2307: Cannot find module 'clsx' or its corresponding type declarations.

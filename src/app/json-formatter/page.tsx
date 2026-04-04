@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import JsonFormatterClient from "@/components/tools/JsonFormatterClient";
+export const metadata: Metadata = { title: "JSON Formatter & Validator — Prettify JSON Online | iUseTools", description: "Format, prettify, validate, and minify JSON. Instant error highlighting. Free online JSON tool." };
+const tool = { name: "JSON Formatter", description: "Format, validate, and minify JSON instantly", icon: "🔧", color: "green", bgGradient: "from-green-500 to-emerald-600", inputFormats: ["JSON"], outputFormat: "JSON", howTo: ["Paste your JSON into the input","Choose Format or Minify mode","Click process to validate and format","Copy formatted output"], features: ["Prettify JSON with custom indent","Minify JSON to reduce size","Real-time syntax validation","Show parse error details","JSON structure statistics (keys, objects, arrays)","Load sample JSON to try it"], faqs: [{ q:"What is JSON minification?",a:"Minification removes all whitespace and newlines to reduce file size — useful for APIs and web performance." },{ q:"Does it support JSON5 or comments?",a:"Standard JSON only. JSON5 (with comments) is not supported." }] };
+export default function Page() { return <ToolLayout tool={tool}><JsonFormatterClient /></ToolLayout>; }

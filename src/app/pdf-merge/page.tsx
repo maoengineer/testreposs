@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import PdfMergerClient from "@/components/tools/PdfMergerClient";
+export const metadata: Metadata = { title: "PDF Merger — Merge Multiple PDFs into One | iUseTools", description: "Combine two or more PDF files into a single document. Reorder pages by dragging. Free, private, browser-based." };
+const tool = { name: "PDF Merger", description: "Combine multiple PDF files into one document", icon: "📎", color: "emerald", bgGradient: "from-emerald-500 to-teal-600", inputFormats: ["PDF"], outputFormat: "PDF", howTo: ["Upload two or more PDF files","Reorder files using the arrow buttons","Click Merge","Download merged PDF"], features: ["Merge unlimited PDFs","Drag to reorder documents","Preserves all pages and formatting","No file size limits","100% private — stays in your browser"], faqs: [{ q:"How many PDFs can I merge?",a:"You can merge as many PDFs as your browser memory allows. There is no hard limit." },{ q:"Will bookmarks be preserved?",a:"Basic content and pages are preserved. Advanced PDF features like bookmarks may not transfer." }] };
+export default function Page() { return <ToolLayout tool={tool}><PdfMergerClient /></ToolLayout>; }

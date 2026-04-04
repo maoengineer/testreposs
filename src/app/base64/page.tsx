@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import Base64Client from "@/components/tools/Base64Client";
+export const metadata: Metadata = { title: "Base64 Encoder & Decoder — Text and Image | iUseTools", description: "Encode text and images to Base64, or decode Base64 strings back to text. Fast, free, browser-based." };
+const tool = { name: "Base64 Encoder / Decoder", description: "Encode text/images to Base64 or decode Base64 strings", icon: "📦", color: "amber", bgGradient: "from-amber-500 to-orange-600", inputFormats: ["Text","Image"], outputFormat: "Base64 / Text", howTo: ["Choose Encode or Decode mode","Enter text or paste a Base64 string","View the result instantly","Copy or swap modes"], features: ["Encode any text to Base64","Decode Base64 back to text","Encode images to Base64 data URL","Swap encode/decode with one click","Character and byte count"], faqs: [{ q:"What is Base64 used for?", a:"Base64 is commonly used to encode binary data (like images) for transmission in text-based formats like JSON, HTML, or email." },{ q:"Can I encode emoji with Base64?",a:"Yes, unicode text including emoji is supported via UTF-8 encoding." }] };
+export default function Page() { return <ToolLayout tool={tool}><Base64Client /></ToolLayout>; }

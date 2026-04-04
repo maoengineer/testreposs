@@ -1,0 +1,102 @@
+﻿
+Error: Cannot apply 
+unknown utility class 
+`border-border`. Are you 
+using CSS modules or 
+similar and missing 
+`@reference`? https://tailw
+indcss.com/docs/functions-a
+nd-directives#reference-dir
+ective
+    [2m[at 
+onInvalidCandidate 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:21:131
+4)][0m
+    [2m[at Ee 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:16:370
+66)][0m
+    [2m[at 
+C:\Users\najam\This is PDF\
+convertiq\node_modules\tail
+windcss\dist\lib.js:21:355]
+[0m
+    [2m[at _r 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:3:1733
+)][0m
+    [2m[at I 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:3:1377
+)][0m
+    [2m[at Te 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:21:172
+)][0m
+    [2m[at mn 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:38:294
+)][0m
+    [2m[at async gn 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\tai
+lwindcss\dist\lib.js:38:631
+)][0m
+    [2m[at async Xr 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\@ta
+ilwindcss\node\dist\index.j
+s:10:3416)][0m
+> Build error occurred
+Error: Turbopack build 
+failed with 1 errors:
+Error evaluating Node.js 
+code
+CssSyntaxError: 
+tailwindcss: 
+C:\Users\najam\This is PDF\
+convertiq\src\app\globals.c
+ss:1:1: Cannot apply 
+unknown utility class 
+`border-border`. Are you 
+using CSS modules or 
+similar and missing 
+`@reference`? https://tailw
+indcss.com/docs/functions-a
+nd-directives#reference-dir
+ective
+    at Input.error (node_mo
+dules/postcss/lib/input.js:
+135:16) 
+[C:\Users\najam\This is PDF
+\convertiq\.next\build\chun
+ks\node_modules_13sb.px._.j
+s:4651:22]
+    at error (node_modules/
+postcss/lib/node.js:146:32)
+ [C:\Users\najam\This is PD
+F\convertiq\.next\build\chu
+nks\node_modules_13sb.px._.
+js:928:38]
+    [at Object.Once 
+(C:\Users\najam\This is PDF
+\convertiq\node_modules\@ta
+ilwindcss\postcss\dist\inde
+x.js:10:6913)]
+    at async 
+LazyResult.runAsync (node_m
+odules/postcss/lib/lazy-res
+ult.js:293:11) 
+[C:\Users\najam\This is PDF
+\convertiq\.next\build\chun
+ks\node_modules_13sb.px._.j
+s:6214:21]
+
+

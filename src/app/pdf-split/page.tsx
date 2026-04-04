@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import PdfSplitterClient from "@/components/tools/PdfSplitterClient";
+export const metadata: Metadata = { title: "PDF Splitter — Split PDF into Pages | iUseTools", description: "Split a PDF into individual pages or extract specific pages. Download as a ZIP file. Free and private." };
+const tool = { name: "PDF Splitter", description: "Split a PDF into individual pages or extract a range", icon: "✂️", color: "pink", bgGradient: "from-pink-500 to-rose-600", inputFormats: ["PDF"], outputFormat: "PDF (ZIP)", howTo: ["Upload your PDF","Choose: split all pages or enter a custom range","Click Split","Download individual pages as ZIP"], features: ["Extract all pages as separate PDFs","Custom page range (e.g. 1,3,5-8)","Download all pages in a ZIP","Works with any PDF","Browser-based — completely private"], faqs: [{ q:"How do I specify pages to extract?",a:"Use comma-separated numbers or ranges: e.g. '1,3,5-8' extracts pages 1, 3, 5, 6, 7, and 8." },{ q:"What format are the output files?",a:"Each page is saved as an individual PDF file, all bundled into a ZIP archive." }] };
+export default function Page() { return <ToolLayout tool={tool}><PdfSplitterClient /></ToolLayout>; }

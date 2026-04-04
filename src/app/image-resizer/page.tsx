@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import ImageResizerClient from "@/components/tools/ImageResizerClient";
+export const metadata: Metadata = { title: "Image Resizer — Resize Images Online | iUseTools", description: "Resize any image to exact pixel dimensions or percentage. Lock aspect ratio. Free, client-side, no upload needed." };
+const tool = { name: "Image Resizer", description: "Resize images to any size — by pixels or percentage", icon: "📐", color: "blue", bgGradient: "from-blue-500 to-cyan-600", inputFormats: ["JPG","PNG","WebP","BMP"], outputFormat: "JPG / PNG / WebP", howTo: ["Upload image","Choose resize by pixels or percent","Set dimensions or scale","Download resized image"], features: ["Resize by exact pixel size or percentage","Lock aspect ratio to avoid distortion","Live dimension preview","Output as JPG, PNG, or WebP"], faqs: [{ q:"Can I upscale an image?",a:"Yes, you can set a scale above 100% or larger pixel dimensions, though upscaling may reduce quality." },{ q:"Will proportions be maintained?", a:"Enable 'Lock aspect ratio' to automatically adjust height when you change width." }] };
+export default function Page() { return <ToolLayout tool={tool}><ImageResizerClient /></ToolLayout>; }

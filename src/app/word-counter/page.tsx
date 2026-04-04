@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import WordCounterClient from "@/components/tools/WordCounterClient";
+export const metadata: Metadata = { title: "Word Counter — Count Words, Characters & More | iUseTools", description: "Count words, characters, sentences, paragraphs, and estimate reading time. Free online word counter with live stats." };
+const tool = { name: "Word Counter", description: "Count words, characters, sentences, and estimate reading time", icon: "📝", color: "orange", bgGradient: "from-orange-500 to-amber-600", inputFormats: ["Plain Text"], outputFormat: "Statistics", howTo: ["Paste or type your text","Word count updates instantly","View detailed stats below","Copy stats if needed"], features: ["Live word and character count","Sentence and paragraph counting","Estimated reading time","Speaking time estimate","Top word frequency chart","No word limits"], faqs: [{ q:"How is reading time calculated?",a:"Based on an average reading speed of 200 words per minute." },{ q:"Is there a text length limit?",a:"No. You can count words in any length of text." }] };
+export default function Page() { return <ToolLayout tool={tool}><WordCounterClient /></ToolLayout>; }

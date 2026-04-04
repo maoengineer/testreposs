@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import ImageWatermarkClient from "@/components/tools/ImageWatermarkClient";
+export const metadata: Metadata = { title: "Image Watermark — Add Text Watermark to Images | iUseTools", description: "Add a custom text watermark to any image. Control position, opacity, color, and font size. Free and private." };
+const tool = { name: "Image Watermark", description: "Add custom text watermarks to protect your images", icon: "💧", color: "indigo", bgGradient: "from-indigo-500 to-violet-600", inputFormats: ["JPG","PNG","WebP"], outputFormat: "PNG", howTo: ["Upload your image","Enter your watermark text","Choose position, size, color, and opacity","Download watermarked image"], features: ["5 position options (corners + center)","Adjustable opacity","Custom color picker","Font size control","Download as high-quality PNG"], faqs: [{ q:"Can I use my logo as a watermark?",a:"Currently only text watermarks are supported. Logo watermark support is coming soon." },{ q:"Will the watermark affect image quality?", a:"The output is saved as PNG which is lossless, so original image quality is preserved." }] };
+export default function Page() { return <ToolLayout tool={tool}><ImageWatermarkClient /></ToolLayout>; }

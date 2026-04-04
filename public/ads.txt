@@ -1,0 +1,10 @@
+# AdSense Publisher ID
+# Replace the placeholder below with your actual AdSense publisher ID
+# Format: google.com, pub-XXXXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# INSTRUCTIONS:
+# 1. Sign up for Google AdSense at https://www.google.com/adsense
+# 2. Get approved and note your publisher ID (looks like: pub-1234567890123456)
+# 3. Replace the line below with your real publisher ID:
+
+google.com, pub-7280243300261707, DIRECT, f08c47fec0942fa0

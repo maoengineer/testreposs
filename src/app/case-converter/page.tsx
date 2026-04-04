@@ -1,0 +1,6 @@
+﻿import type { Metadata } from "next";
+import ToolLayout from "@/components/tools/ToolLayout";
+import CaseConverterClient from "@/components/tools/CaseConverterClient";
+export const metadata: Metadata = { title: "Text Case Converter — UPPER, lower, camelCase & More | iUseTools", description: "Convert text between uppercase, lowercase, title case, camelCase, snake_case, and 7 more formats. Instantly." };
+const tool = { name: "Case Converter", description: "Convert text between 11 case formats instantly", icon: "🔡", color: "cyan", bgGradient: "from-cyan-500 to-blue-600", inputFormats: ["Plain Text"], outputFormat: "Plain Text", howTo: ["Type or paste your text","Select the desired case format","Copy the converted result","Use Swap to chain conversions"], features: ["11 case formats supported","camelCase, snake_case, kebab-case, PascalCase","UPPER, lower, Title, Sentence case","Toggle case and dot.case","One-click copy","Chain conversions with Swap"], faqs: [{ q:"What is camelCase?",a:"camelCase writes compound words with no spaces, capitalizing each word except the first: e.g. myVariableName." },{ q:"What is snake_case?",a:"snake_case uses underscores between words, all lowercase: e.g. my_variable_name." }] };
+export default function Page() { return <ToolLayout tool={tool}><CaseConverterClient /></ToolLayout>; }
