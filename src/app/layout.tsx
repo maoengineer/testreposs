@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import ClientStateCheck from "@/components/ClientStateCheck";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -113,6 +114,7 @@ export default function RootLayout({
         </Script>
 
         <ThemeProvider>
+          <ClientStateCheck />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
