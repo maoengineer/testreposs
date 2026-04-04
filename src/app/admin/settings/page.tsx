@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
 
@@ -11,6 +11,8 @@ interface Settings {
   maintenanceMode: boolean;
   googleAnalytics: string;
   footerText: string;
+  adminEmail?: string;
+  adminPass?: string;
 }
 
 const defaults: Settings = {
@@ -102,6 +104,14 @@ export default function AdminSettings() {
               ⚠️ Maintenance mode is ON. Visitors will see a maintenance page.
             </div>
           )}
+        </div>
+
+        {/* Security / Admin Login */}
+        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-6 space-y-5">
+          <h3 className="font-semibold text-white border-b border-slate-800 pb-3">Admin Login Credentials</h3>
+          <p className="text-slate-400 text-xs">Set custom login credentials. If left blank, defaults will be used.</p>
+          <Field label="Custom Admin Email" id="admin-email" value={settings.adminEmail || ""} onChange={v => update("adminEmail", v)} type="email" placeholder="Leave blank to use default" />
+          <Field label="Custom Admin Password / Passcode" id="admin-pass" value={settings.adminPass || ""} onChange={v => update("adminPass", v)} placeholder="Leave blank to use default" type="password" />
         </div>
 
         <button onClick={save}
