@@ -5,8 +5,8 @@ import { ArrowRight, FileImage, FileText, FileType, Type, Image, Layers, ScanTex
 import Breadcrumb from "@/components/layout/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "All Free File Conversion Tools | 21+ Tools",
-  description: "Browse all 21+ free tools: JPG to Word, PDF to Text, PDF to Word, Image Resizer, Image Compressor, QR Generator, Password Generator, JSON Formatter, and more. No signup, no upload, instant results.",
+  title: "All Free File Conversion Tools | 30+ Tools",
+  description: "Browse all 30+ free tools: JPG to Word, PDF to Text, PDF to Word, Image Resizer, Image Compressor, QR Generator, Password Generator, JSON Formatter, and more. No signup, no upload, instant results.",
   alternates: { canonical: "https://iusetools.site/tools" },
 };
 
@@ -58,7 +58,7 @@ export default function ToolsPage() {
 
       <div className="mt-8 mb-12 text-center">
         <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-foreground mb-4">
-          All 21+ Free Tools
+          All 30+ Free Tools
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Pick any tool below and start converting immediately. No registration, no uploads to servers, no hidden limits. Everything runs privately in your browser.
