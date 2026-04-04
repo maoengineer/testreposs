@@ -8,13 +8,6 @@ const footerLinks = {
     { label: "PDF to Word", href: "/pdf-to-word" },
     { label: "PDF Merger", href: "/pdf-merge" },
     { label: "PDF Splitter", href: "/pdf-split" },
-    { label: "Text to PDF", href: "/text-to-pdf" },
-    { label: "Text to Word", href: "/text-to-word" },
-    { label: "Image to PDF", href: "/image-to-pdf" },
-    { label: "Image Resizer", href: "/image-resizer" },
-    { label: "Image Compressor", href: "/image-compressor" },
-    { label: "QR Code Generator", href: "/qr-generator" },
-    { label: "Password Generator", href: "/password-generator" },
     { label: "View All Tools →", href: "/tools" },
   ],
   Company: [
