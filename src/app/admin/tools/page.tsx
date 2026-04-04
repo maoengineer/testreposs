@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const ALL_TOOLS = [
@@ -38,8 +38,25 @@ export default function AdminTools() {
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    // Load hidden tools on mount
+    try {
+      const hiddenStr = localStorage.getItem("ciq_hidden_tools");
+      if (hiddenStr) {
+        const hidden = JSON.parse(hiddenStr);
+        setTools(prev => prev.map(t => ({ ...t, status: !hidden.includes(t.slug) })));
+      }
+    } catch (e) {}
+  }, []);
+
   const toggle = (slug: string) => {
-    setTools(prev => prev.map(t => t.slug === slug ? { ...t, status: !t.status } : t));
+    setTools(prev => {
+      const nextTools = prev.map(t => t.slug === slug ? { ...t, status: !t.status } : t);
+      // Save hidden tools to localStorage
+      const hidden = nextTools.filter(t => !t.status).map(t => t.slug);
+      localStorage.setItem("ciq_hidden_tools", JSON.stringify(hidden));
+      return nextTools;
+    });
   };
 
   const categories = ["All", ...Array.from(new Set(ALL_TOOLS.map(t => t.category)))];
