@@ -7,11 +7,11 @@ import { Zap, Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   {
-    label: "Tools",
-    href: "/tools",
+    label: "Image Tools",
+    href: "/#image-tools",
     children: [
-      // Image Tools
       { label: "JPG to Word", href: "/jpg-to-word" },
       { label: "Image to Text (OCR)", href: "/image-to-text" },
       { label: "Image to PDF", href: "/image-to-pdf" },
@@ -19,17 +19,32 @@ const navLinks = [
       { label: "Image Compressor", href: "/image-compressor" },
       { label: "Image Converter", href: "/image-converter" },
       { label: "Image Watermark", href: "/image-watermark" },
-      // PDF Tools
+    ],
+  },
+  {
+    label: "PDF Tools",
+    href: "/#pdf-tools",
+    children: [
       { label: "PDF to Text", href: "/pdf-to-text" },
       { label: "PDF to Word", href: "/pdf-to-word" },
       { label: "PDF to Images", href: "/pdf-to-images" },
       { label: "PDF Merger", href: "/pdf-merge" },
       { label: "PDF Splitter", href: "/pdf-split" },
-      // Text Tools
+    ],
+  },
+  {
+    label: "Text Tools",
+    href: "/#text-tools",
+    children: [
       { label: "Text to PDF", href: "/text-to-pdf" },
       { label: "Text to Word", href: "/text-to-word" },
       { label: "Text to Image", href: "/text-to-image" },
-      // Utility Tools
+    ],
+  },
+  {
+    label: "Utility Tools",
+    href: "/#utility-tools",
+    children: [
       { label: "Word Counter", href: "/word-counter" },
       { label: "Case Converter", href: "/case-converter" },
       { label: "QR Code Generator", href: "/qr-generator" },
@@ -54,7 +69,7 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [toolsOpen, setToolsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -69,7 +84,7 @@ export default function Header() {
 
   useEffect(() => {
     setMobileOpen(false);
-    setToolsOpen(false);
+    setOpenDropdown(null);
   }, [pathname]);
 
   return (
@@ -100,18 +115,18 @@ export default function Header() {
                 <div key={link.label} className="relative group">
                   <button
                     className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    onMouseEnter={() => setToolsOpen(true)}
-                    onMouseLeave={() => setToolsOpen(false)}
+                    onMouseEnter={() => setOpenDropdown(link.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
                     aria-haspopup="true"
-                    aria-expanded={toolsOpen}
+                    aria-expanded={openDropdown === link.label}
                   >
                     {link.label}
                     <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                   </button>
                   <div
                     className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-                    onMouseEnter={() => setToolsOpen(true)}
-                    onMouseLeave={() => setToolsOpen(false)}
+                    onMouseEnter={() => setOpenDropdown(link.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <div className="w-64 rounded-xl border border-border bg-card shadow-xl p-2 max-h-[80vh] overflow-y-auto">
                       {link.children.map((child) => (
