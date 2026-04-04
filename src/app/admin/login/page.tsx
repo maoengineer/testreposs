@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -17,9 +17,22 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    
+    // Read custom settings, fallback to hardcoded defaults
+    let validEmail = ADMIN_EMAIL;
+    let validPass = ADMIN_PASS;
+    try {
+      const settingsStr = localStorage.getItem("ciq_settings");
+      if (settingsStr) {
+        const settings = JSON.parse(settingsStr);
+        if (settings.adminEmail) validEmail = settings.adminEmail;
+        if (settings.adminPass) validPass = settings.adminPass;
+      }
+    } catch (e) {}
+
     // Simulate a small delay for UX
     await new Promise(r => setTimeout(r, 600));
-    if (email.trim() === ADMIN_EMAIL && password === ADMIN_PASS) {
+    if (email.trim() === validEmail && password === validPass) {
       sessionStorage.setItem("ciq_admin", "1");
       router.replace("/admin/dashboard");
     } else {
