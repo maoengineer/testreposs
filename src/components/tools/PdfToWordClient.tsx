@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
-import type { Paragraph } from "docx";
 import DropZone from "@/components/tools/DropZone";
 import PrivacyNote from "@/components/tools/PrivacyNote";
 import ProcessingState from "@/components/tools/ProcessingState";
@@ -77,7 +76,7 @@ export default function PdfToWordClient() {
       }
 
       setProgress(92);
-      const doc = new Document({ sections: [{ children: paragraphsAll as Paragraph[] }] });
+      const doc = new Document({ sections: [{ children: paragraphsAll as unknown[] }] });
       const blob = await Packer.toBlob(doc);
       setProgress(100);
       downloadBlob(blob, `${sanitizeFilename(file.name.replace(".pdf", ""))}.docx`);

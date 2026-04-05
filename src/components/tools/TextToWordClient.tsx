@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { RefreshCw, Upload } from "lucide-react";
-import type { Paragraph } from "docx";
 import PrivacyNote from "@/components/tools/PrivacyNote";
 import ProcessingState from "@/components/tools/ProcessingState";
 import { downloadBlob } from "@/lib/utils";
@@ -33,7 +32,7 @@ export default function TextToWordClient() {
 
     try {
       const { Document, Packer, Paragraph, TextRun, HeadingLevel } = await import("docx");
-      const children: Paragraph[] = [];
+      const children: unknown[] = [];
 
       if (title.trim()) {
         children.push(
