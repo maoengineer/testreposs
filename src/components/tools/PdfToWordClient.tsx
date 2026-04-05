@@ -76,7 +76,7 @@ export default function PdfToWordClient() {
       }
 
       setProgress(92);
-      const doc = new Document({ sections: [{ children: paragraphsAll as unknown[] }] });
+      const doc = new Document({ sections: [{ children: paragraphsAll as any[] }] });
       const blob = await Packer.toBlob(doc);
       setProgress(100);
       downloadBlob(blob, `${sanitizeFilename(file.name.replace(".pdf", ""))}.docx`);

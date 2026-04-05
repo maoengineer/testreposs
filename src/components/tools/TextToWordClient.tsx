@@ -32,7 +32,7 @@ export default function TextToWordClient() {
 
     try {
       const { Document, Packer, Paragraph, TextRun, HeadingLevel } = await import("docx");
-      const children: unknown[] = [];
+      const children: any[] = [];
 
       if (title.trim()) {
         children.push(
