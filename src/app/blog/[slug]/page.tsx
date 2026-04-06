@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog/posts";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
@@ -155,21 +154,7 @@ export default async function BlogPostPage({ params }: Props) {
             <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-foreground leading-tight mb-4">
               {post.title}
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">{post.description}</p>
-
-            {/* Feature / Hero Image */}
-            {post.featureImage && (
-              <div className="relative w-full overflow-hidden rounded-xl border border-border shadow-lg bg-muted" style={{ aspectRatio: "16/9" }}>
-                <Image
-                  src={post.featureImage}
-                  alt={post.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 896px"
-                  className="object-cover"
-                />
-              </div>
-            )}
+            <p className="text-lg text-muted-foreground leading-relaxed">{post.description}</p>
           </header>
 
           <div className="prose-content">

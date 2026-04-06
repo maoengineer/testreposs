@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { blogPosts } from "@/lib/blog/posts";
@@ -77,27 +78,41 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="card-hover group flex flex-col rounded-xl border border-border bg-card p-5"
+              className="card-hover group flex flex-col overflow-hidden rounded-xl border border-border bg-card"
               id={`blog-${post.slug}`}
             >
-              <div className="mb-3 flex items-center gap-2 flex-wrap">
-                <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                  {post.category}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                </span>
-                <span className="text-xs text-muted-foreground">·</span>
-                <span className="text-xs text-muted-foreground">{post.readTime}</span>
+              {/* Feature Image */}
+              <div className="relative w-full overflow-hidden bg-muted" style={{ aspectRatio: "16/9" }}>
+                <Image
+                  src={post.featureImage}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
-              <h2 className="font-display text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                {post.title}
-              </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4 flex-1">
-                {post.description}
-              </p>
-              <div className="flex items-center gap-1 text-xs font-semibold text-primary mt-auto">
-                Read more <ArrowRight className="h-3.5 w-3.5" />
+
+              {/* Card Body */}
+              <div className="flex flex-col flex-1 p-5">
+                <div className="mb-3 flex items-center gap-2 flex-wrap">
+                  <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                  </span>
+                  <span className="text-xs text-muted-foreground">·</span>
+                  <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                </div>
+                <h2 className="font-display text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  {post.title}
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4 flex-1">
+                  {post.description}
+                </p>
+                <div className="flex items-center gap-1 text-xs font-semibold text-primary mt-auto">
+                  Read more <ArrowRight className="h-3.5 w-3.5" />
+                </div>
               </div>
             </Link>
           ))}
