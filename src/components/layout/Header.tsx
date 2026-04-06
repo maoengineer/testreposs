@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Zap, Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
+import { Zap, Menu, X, ChevronDown, Moon, Sun, Search } from "lucide-react";
 import { useTheme } from "next-themes";
+import GlobalSearch from "./GlobalSearch";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -71,6 +72,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
@@ -87,137 +89,176 @@ export default function Header() {
     setOpenDropdown(null);
   }, [pathname]);
 
-  return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border"
-          : "bg-card/80 backdrop-blur-sm border-b border-border/50"
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-bg shadow-md group-hover:shadow-lg transition-shadow">
-              <Zap className="h-4 w-4 text-white" />
-            </div>
-            <span className="font-display text-xl font-bold">
-              <span className="gradient-text">iUse</span>
-              <span className="text-foreground">Tools</span>
-            </span>
-          </Link>
+  // Global keyboard shortcut: Ctrl+K / Cmd+K
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((v) => !v);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div key={link.label} className="relative group">
-                  <button
-                    className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                    aria-haspopup="true"
-                    aria-expanded={openDropdown === link.label}
-                  >
-                    {link.label}
-                    <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
-                  </button>
-                  <div
-                    className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
-                    <div className="w-64 rounded-xl border border-border bg-card shadow-xl p-2 max-h-[80vh] overflow-y-auto">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+  return (
+    <>
+      <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border"
+            : "bg-card/80 backdrop-blur-sm border-b border-border/50"
+        }`}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-bg shadow-md group-hover:shadow-lg transition-shadow">
+                <Zap className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-display text-xl font-bold">
+                <span className="gradient-text">iUse</span>
+                <span className="text-foreground">Tools</span>
+              </span>
+            </Link>
+
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navLinks.map((link) =>
+                link.children ? (
+                  <div key={link.label} className="relative group">
+                    <button
+                      className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                      onMouseEnter={() => setOpenDropdown(link.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === link.label}
+                    >
+                      {link.label}
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                    </button>
+                    <div
+                      className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                      onMouseEnter={() => setOpenDropdown(link.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
+                    >
+                      <div className="w-64 rounded-xl border border-border bg-card shadow-xl p-2 max-h-[80vh] overflow-y-auto">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === link.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-          </nav>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      pathname === link.href
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+            </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2">
-            {mounted && (
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              {/* Search button — desktop shows with shortcut hint */}
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                aria-label="Toggle theme"
+                id="global-search-btn"
+                onClick={() => setSearchOpen(true)}
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-muted/50 text-sm text-muted-foreground hover:text-foreground hover:bg-muted hover:border-border/80 transition-colors"
+                aria-label="Search tools and posts (Ctrl+K)"
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <Search className="h-4 w-4" />
+                <span className="text-xs">Search…</span>
+                <kbd className="ml-1 flex items-center gap-0.5 text-[10px] font-mono px-1.5 py-0.5 rounded border border-border bg-card text-muted-foreground">
+                  ⌘K
+                </kbd>
               </button>
-            )}
-            <Link
-              href="/tools"
-              className="hidden md:flex btn-primary text-xs px-4 py-2"
-            >
-              All Tools
-            </Link>
-            <button
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+
+              {/* Mobile search icon only */}
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+
+              {mounted && (
+                <button
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                </button>
+              )}
+              <Link
+                href="/tools"
+                className="hidden md:flex btn-primary text-xs px-4 py-2"
+              >
+                All Tools
+              </Link>
+              <button
+                className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-card">
-          <nav className="px-4 py-4 space-y-1">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div key={link.label}>
-                  <p className="px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div className="md:hidden border-t border-border bg-card">
+            <nav className="px-4 py-4 space-y-1">
+              {navLinks.map((link) =>
+                link.children ? (
+                  <div key={link.label}>
+                    <p className="px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      {link.label}
+                    </p>
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="block px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  >
                     {link.label}
-                  </p>
-                  {link.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="block px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-          </nav>
-        </div>
-      )}
-    </header>
+                  </Link>
+                )
+              )}
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
   );
 }
