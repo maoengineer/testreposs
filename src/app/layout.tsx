@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import ClientStateCheck from "@/components/ClientStateCheck";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -120,6 +121,7 @@ export default function RootLayout({
           <Footer />
           <CookieBanner />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
