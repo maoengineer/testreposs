@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog/posts";
-import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,6 +27,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       type: "article",
       publishedTime: post.date,
+      images: post.featureImage
+        ? [{ url: `https://iusetools.site${post.featureImage}`, width: 1200, height: 630, alt: post.title }]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: post.featureImage ? [`https://iusetools.site${post.featureImage}`] : [],
     },
   };
 }
@@ -45,6 +55,7 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    image: post.featureImage ? `https://iusetools.site${post.featureImage}` : undefined,
     author: { "@type": "Organization", name: "iUseTools" },
     publisher: { "@type": "Organization", name: "iUseTools", url: "https://iusetools.site" },
   };
@@ -134,7 +145,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <article className="mt-8">
           <header className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{post.category}</span>
               <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3 w-3" />{post.readTime}</span>
               <time className="text-xs text-muted-foreground" dateTime={post.date}>
@@ -144,7 +155,21 @@ export default async function BlogPostPage({ params }: Props) {
             <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-foreground leading-tight mb-4">
               {post.title}
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">{post.description}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">{post.description}</p>
+
+            {/* Feature / Hero Image */}
+            {post.featureImage && (
+              <div className="relative w-full overflow-hidden rounded-xl border border-border shadow-lg bg-muted" style={{ aspectRatio: "16/9" }}>
+                <Image
+                  src={post.featureImage}
+                  alt={post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 896px"
+                  className="object-cover"
+                />
+              </div>
+            )}
           </header>
 
           <div className="prose-content">
