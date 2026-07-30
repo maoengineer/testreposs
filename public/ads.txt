@@ -7,4 +7,4 @@
 # 2. Get approved and note your publisher ID (looks like: pub-1234567890123456)
 # 3. Replace the line below with your real publisher ID:
 
-google.com, pub-7280243300261707, DIRECT, f08c47fec0942fa0
+google.com, pub-9646271146999593, DIRECT, f08c47fec0942fa0
