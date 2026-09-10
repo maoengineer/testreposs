@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import ClientStateCheck from "@/components/ClientStateCheck";
+import KhTrackerWidget from "@/components/layout/KhTrackerWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -120,6 +121,9 @@ export default function RootLayout({
           <Footer />
           <CookieBanner />
         </ThemeProvider>
+
+        {/* khTracker Safelink Floating Pop-up Countdown Widget */}
+        <KhTrackerWidget />
       </body>
     </html>
   );
